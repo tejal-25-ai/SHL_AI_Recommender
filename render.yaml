@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: shl-ai-recommender
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    healthCheckPath: /health
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false   # set manually in Render dashboard -- never commit real keys
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: EMBEDDING_MODEL
+        value: BAAI/bge-small-en-v1.5
+      - key: CROSS_ENCODER_MODEL
+        value: cross-encoder/ms-marco-MiniLM-L-6-v2
+      - key: RETRIEVAL_TOP_K
+        value: "30"
+      - key: CROSS_ENCODER_THRESHOLD
+        value: "10"
+      - key: FINAL_TOP_K
+        value: "10"
+      - key: MAX_TURNS
+        value: "8"
+      - key: FORCE_RECOMMEND_AFTER_TURN
+        value: "6"
+      - key: PYTHON_VERSION
+        value: 3.12.3

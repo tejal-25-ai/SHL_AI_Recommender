@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Env
+.env
+
+# Raw scraper intermediates -- large, regenerable, not needed at runtime
+data/raw/
+inspect_output.html
+
+# NOTE: data/processed/ and data/embeddings/ are intentionally NOT
+# ignored -- the deployed service loads them directly at startup
+# (see app/api/chat.py get_retrieval_service). Re-scraping/re-embedding
+# on every deploy would be slow and could exceed the cold-start budget.
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
