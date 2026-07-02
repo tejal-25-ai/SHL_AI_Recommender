@@ -14,6 +14,11 @@ logger = get_logger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    logger.info("Application starting...")
+    yield
+"""
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     with log_duration(logger, "startup_warmup"):
         retrieval = get_retrieval_service()
         get_llm_client()
@@ -25,6 +30,7 @@ async def lifespan(app: FastAPI):
     logger.info("Startup warmup complete — service ready")
     yield
 """ 
+"""
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Warm up expensive singletons (embedding model + index load, LLM
